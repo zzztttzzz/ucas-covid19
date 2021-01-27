@@ -24,14 +24,14 @@ verify_cert = False
 
 # 全局变量，如果使用自己的服务器运行请根据需要修改 ->以下变量<-
 user = "USERNAME"  # sep 账号
-passwd = "PASSWORD"  # sep 密码
+passwd = r"PASSWORD"  # sep 密码
 api_key = "API_KEY"  # 可选， server 酱的通知 api key
 
 # 可选，如果需要邮件通知，那么修改下面五行 :)
 smtp_port = "SMTP_PORT"
 smtp_server = "SMTP_SERVER"
 sender_email = "SENDER_EMAIL"
-sender_email_passwd = "SENDER_EMAIL_PASSWD"
+sender_email_passwd = r"SENDER_EMAIL_PASSWD"
 receiver_email = "RECEIVER_EMAIL"
 
 # 全局变量，使用自己的服务器运行请根据需要修改 ->以上变量<-
