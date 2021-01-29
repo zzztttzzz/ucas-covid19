@@ -69,7 +69,9 @@ Github提供了一个secret功能，用于存储密钥等敏感信息，请按�
 ![](setting.png)
 
 
-完成之后, 每天 UTC 23:50 (北京时间 7:50) 自动触发github actions进行填报 。
+完成之后, 每天 UTC 0:10 (北京时间 8:10) 自动触发 github actions 进行填报 。
+
+如果 fork 之后想更新至本仓库最新代码，请参考[此教程](https://blog.csdn.net/qq_35246620/article/details/98039346) 。
 
 # 方法三：使用Windows的任务计划程序（适合每天需要打开电脑来学习的同学）
 不需要服务器，不需要了解`github actions`, 本地运行，不需担心sep账号密码泄露。
