@@ -114,7 +114,7 @@ def submit(s: requests.Session, old: dict):
         # 'sfjchbry': old['sfjchbry'],  # 2020.9.16 del
         'sfjcbh': old['sfjcbh'],  # 是否接触病患
         # 'jcbhlx': old['jcbhlx'], # 2021.1.29 del 接触病患类型
-        'sfcyglq': old['sfcyglq'],  # 是否处于观察期
+        'sfcyglq': old['sfcyglq'],  # 是否处于隔离期
         # 'gllx': old['gllx'],   # 2021.1.29 del 隔离类型
         'sfcxzysx': old['sfcxzysx'],
         'old_szdd': old['szdd'],
