@@ -16,21 +16,23 @@
 # 方法一： 使用自己的服务器运行
 ## 用法
 1. 点击右上角`star` :)
-
-2. git clone到服务器中
-
-3. 进到到项目文件夹中，使用`pip3 install -r requirement.txt`安装依赖
-
-4. 修改项目文件夹里面`sub.py`代码里面的sep账号和密码
-
+2. 安装方式一
+   * 直接将项目下载到服务器上，推荐使用`git clone` 或者`wget`的方式
+   * 进入到项目文件夹中，使用`pip3 install -r requirement.txt`命令一键安装依赖或者手动安装。依赖库为`requests`和`pytz`
+   * 修改项目文件夹里面`sub.py`代码里面的sep账号和密码
+3. 安装方式二
+   * 下载本项目到本地
+   * 修改本地项目里面`sub.py`代码里面的sep账号和密码
+   * 将`sub.py`上传到服务器上，安装依赖`requests`库和`pytz`库
+4. 安装方式三(偷懒版)
+   * 在服务器中创建`sub.py`文件，然后复制本仓库`sub.py`中的代码到服务器`sub.py`文件。随后，修改服务器中`sub.py`代码里面的sep账号和密码。最后安装依赖。
 5. （可选）填写[server酱](http://sc.ftqq.com/3.version)的api，填写之后可以在程序完成打卡之后通知到微信，如果不填写不影响使用(**注意**：微信消息模板可能在2021年4月下线，服务可能失效)
-
 6. 修改crontab，设定为每天八点半运行。
 
 具体修改：
 ```bash
-$ crontab -e # 进入contrib的文本模式
-30 8 * * * /usr/bin/python3  /root/ucas-covid19/sub.py >>/tmp/yqfk.log # 在文本最后一行添加,注意修改为实际路径，大约2分钟后生效，重启服务直接生效
+$ crontab -e # 进入crontab的文本模式
+30 8 * * * /usr/bin/python3  /root/ucas-covid19/sub.py >>/tmp/yqfk.log # 在文本最后一行添加,注意修改为实际路径，大约2分钟后生效，重启服务直接生效。请注意这里使用是python3不是python2
 ```
 
 
