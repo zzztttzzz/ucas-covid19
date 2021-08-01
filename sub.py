@@ -20,7 +20,7 @@ from email.mime.text import MIMEText
 debug = False
 
 # 忽略网站的证书错误，这很不安全 :(
-verify_cert = False
+verify_cert = True
 
 # 全局变量，如果使用自己的服务器运行请根据需要修改 ->以下变量<-
 user = "USERNAME"  # sep 账号
@@ -97,19 +97,19 @@ def submit(s: requests.Session, old: dict):
         'realname': old['realname'],
         'number': old['number'],
         'szgj_api_info': old['szgj_api_info'],
-        'szgj': old['szgj'],
-        'old_sfzx': old['sfzx'],
+        # 'szgj': old['szgj'],# 2021.8.1 del
+        # 'old_sfzx': old['sfzx'],# 2021.8.1 del
         'sfzx': old['sfzx'],
         'szdd': old['szdd'],
         'ismoved': 0,  # 如果前一天位置变化这个值会为1，第二天仍然获取到昨天的1，而事实上位置是没变化的，所以置0
         # 'ismoved': old['ismoved'],
         'tw': old['tw'],
-        'bztcyy': old['bztcyy'],
+        # 'bztcyy': old['bztcyy'], # 2021.8.1 del
         # 'sftjwh': old['sfsfbh'],  # 2020.9.16 del
         # 'sftjhb': old['sftjhb'],  # 2020.9.16 del
         'sfcxtz': old['sfcxtz'],
-        'sfyyjc': old['sfyyjc'],
-        'jcjgqr': old['jcjgqr'],
+        # 'sfyyjc': old['sfyyjc'],# 2021.8.1 del
+        # 'jcjgqr': old['jcjgqr'],# 2021.8.1 del
         # 'sfjcwhry': old['sfjcwhry'],  # 2020.9.16 del
         # 'sfjchbry': old['sfjchbry'],  # 2020.9.16 del
         'sfjcbh': old['sfjcbh'],  # 是否接触病患
@@ -117,25 +117,25 @@ def submit(s: requests.Session, old: dict):
         'sfcyglq': old['sfcyglq'],  # 是否处于隔离期
         # 'gllx': old['gllx'],   # 2021.1.29 del 隔离类型
         'sfcxzysx': old['sfcxzysx'],
-        'old_szdd': old['szdd'],
+        # 'old_szdd': old['szdd'],# 2021.8.1 del
         'geo_api_info': old['old_city'],  # 保持昨天的结果
         'old_city': old['old_city'],
         'geo_api_infot': old['geo_api_infot'],
         'date': datetime.now(tz=pytz.timezone("Asia/Shanghai")).strftime("%Y-%m-%d"),
-        'fjsj': old['fjsj'],  # 返京时间
-        'ljrq': old['ljrq'],  # 离京日期 add@2021.1.24
-        'qwhd': old['qwhd'],  # 去往何地 add@2021.1.24
-        'chdfj': old['chdfj'],  # 从何地返京 add@2021.1.24
+        # 'fjsj': old['fjsj'],  # 返京时间# 2021.8.1 del
+        # 'ljrq': old['ljrq'],  # 离京日期 add@2021.1.24# 2021.8.1 del
+        # 'qwhd': old['qwhd'],  # 去往何地 add@2021.1.24# 2021.8.1 del
+        # 'chdfj': old['chdfj'],  # 从何地返京 add@2021.1.24# 2021.8.1 del
         # 'jcbhrq': old['jcbhrq'], # del 2021.1.29 接触病患日期
         # 'glksrq': old['glksrq'], # del 2021.1.29 隔离开始日期
-        'fxyy': old['fxyy'],
-        'jcjg': old['jcjg'],
-        'jcjgt': old['jcjgt'],
-        'qksm': old['qksm'],
-        'remark': old['remark'],
+        # 'fxyy': old['fxyy'],# 2021.8.1 del
+        # 'jcjg': old['jcjg'],# 2021.8.1 del
+        # 'jcjgt': old['jcjgt'],# 2021.8.1 del
+        # 'qksm': old['qksm'],# 2021.8.1 del
+        # 'remark': old['remark'],
         'jcjgqk': old['jcjgqk'],
-        'jcwhryfs': old['jcwhryfs'],
-        'jchbryfs': old['jchbryfs'],
+        # 'jcwhryfs': old['jcwhryfs'],# 2021.8.1 del
+        # 'jchbryfs': old['jchbryfs'],# 2021.8.1 del
         'gtshcyjkzt': old['gtshcyjkzt'],  # add @2020.9.16
         'jrsfdgzgfxdq': old['jrsfdgzgfxdq'],  # add @2020.9.16
         'jrsflj': old['jrsflj'],  # add @2020.9.16
@@ -178,6 +178,9 @@ def check_submit_data(data: dict):
     if int(data['tw']) > 4:
         msg.append("体温大于 37.3 度 ，请手动填报")
 
+    if data['jrsflj'] == '是':
+        msg.append("近日有离京经历，请手动填报")
+
     return ";".join(msg) if msg else None
 
 
@@ -196,7 +199,7 @@ def server_chan_message(key, title, body):
     微信通知打卡结果
     """
     # 错误的key也可以发送消息，无需处理 :)
-    msg_url = "https://sc.ftqq.com/{}.send?text={}&desp={}".format(key, title, body)
+    msg_url = "https://sctapi.ftqq.com/{}.send?text={}&desp={}".format(key, title, body)
     requests.get(msg_url)
 
 
